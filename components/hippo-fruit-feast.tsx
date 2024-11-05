@@ -91,12 +91,12 @@ const trashAudioFiles = [
   "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/young-child-saying-y_65naqnFN%20(1)-5H6c8lqnx7Rb23KWqfAf294RDzeuXT.mp3"
 ]
 
-// const threeInARowAudio = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/a-happy-child-shouti_Nf6PdRIw-TS6jJKelW2opikukagHRZyFhHbZjXy.mp3"
-// const tenFruitsAudio = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/a-happy-child-shouti_ujtY9ZAu-mwAFkh0dKrZfIf3vvq4w0mpgZnKioZ.mp3"
-// const hungryAudio = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/I%20am%20hungry-zidZi24ZNPQkDqnpUPJCOHWGRq6Zt8.mp3"
-// const feedMeAudio = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/feed%20me-zOZX9c8Y7ajx6c4rqNl8zWwUzCCy83.mp3"
+const threeInARowAudio = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/a-happy-child-shouti_Nf6PdRIw-TS6jJKelW2opikukagHRZyFhHbZjXy.mp3"
+const tenFruitsAudio = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/a-happy-child-shouti_ujtY9ZAu-mwAFkh0dKrZfIf3vvq4w0mpgZnKioZ.mp3"
+const hungryAudio = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/I%20am%20hungry-zidZi24ZNPQkDqnpUPJCOHWGRq6Zt8.mp3"
+const feedMeAudio = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/feed%20me-zOZX9c8Y7ajx6c4rqNl8zWwUzCCy83.mp3"
 
-export function HippoFruitFeastComponent() {
+export default function HippoFruitFeast() {
   const [score, setScore] = useState(0)
   const [items, setItems] = useState<Item[]>([])
   const [isHippoOpen, setIsHippoOpen] = useState(false)
@@ -123,12 +123,12 @@ export function HippoFruitFeastComponent() {
   const [isSoundMuted, setIsSoundMuted] = useState(true)
   const gameAreaRef = useRef<HTMLDivElement>(null)
   const hippoRef = useRef<HTMLDivElement>(null)
-  const audioRefs = useRef<HTMLAudioElement[]>([])
-  const trashAudioRefs = useRef<HTMLAudioElement[]>([])
-  const threeInARowAudioRef = useRef<HTMLAudioElement>(null)
-  const tenFruitsAudioRef = useRef<HTMLAudioElement>(null)
-  const hungryAudioRef = useRef<HTMLAudioElement>(null)
-  const feedMeAudioRef = useRef<HTMLAudioElement>(null)
+  const audioRefs = useRef<(HTMLAudioElement | null)[]>([])
+  const trashAudioRefs = useRef<(HTMLAudioElement | null)[]>([])
+  const threeInARowAudioRef = useRef<HTMLAudioElement | null>(null)
+  const tenFruitsAudioRef = useRef<HTMLAudioElement | null>(null)
+  const hungryAudioRef = useRef<HTMLAudioElement | null>(null)
+  const feedMeAudioRef = useRef<HTMLAudioElement | null>(null)
   const lastPlayedAudioIndex = useRef<number>(-1)
 
   useEffect(() => {
@@ -137,29 +137,37 @@ export function HippoFruitFeastComponent() {
       audio.muted = isSoundMuted
       return audio
     })
-    audioFiles.forEach((file, index) => {
-      if (audioRefs.current[index]) {
-        audioRefs.current[index].src = file
-      }
-    })
+    
     trashAudioRefs.current = trashAudioFiles.map(() => {
       const audio = new Audio()
       audio.muted = isSoundMuted
       return audio
     })
-    trashAudioFiles.forEach((file, index) => {
-      if (trashAudioRefs.current[index]) {
-        trashAudioRefs.current[index].src = file
-      }
+
+    if (!threeInARowAudioRef.current) {
+      threeInARowAudioRef.current = new Audio(threeInARowAudio)
+    }
+    if (!tenFruitsAudioRef.current) {
+      tenFruitsAudioRef.current = new Audio(tenFruitsAudio)
+    }
+    if (!hungryAudioRef.current) {
+      hungryAudioRef.current = new Audio(hungryAudio)
+    }
+    if (!feedMeAudioRef.current) {
+      feedMeAudioRef.current = new Audio(feedMeAudio)
+    }
+
+    // Set muted state for all audio elements
+    audioRefs.current.forEach(audio => {
+      if (audio) audio.muted = isSoundMuted
     })
-    // threeInARowAudioRef.current = new Audio(threeInARowAudio)
-    // threeInARowAudioRef.current.muted = isSoundMuted
-    // tenFruitsAudioRef.current = new Audio(tenFruitsAudio)
-    // tenFruitsAudioRef.current.muted = isSoundMuted
-    // hungryAudioRef.current = new Audio(hungryAudio)
-    // hungryAudioRef.current.muted = isSoundMuted
-    // feedMeAudioRef.current = new Audio(feedMeAudio)
-    // feedMeAudioRef.current.muted = isSoundMuted
+    trashAudioRefs.current.forEach(audio => {
+      if (audio) audio.muted = isSoundMuted
+    })
+    if (threeInARowAudioRef.current) threeInARowAudioRef.current.muted = isSoundMuted
+    if (tenFruitsAudioRef.current) tenFruitsAudioRef.current.muted = isSoundMuted
+    if (hungryAudioRef.current) hungryAudioRef.current.muted = isSoundMuted
+    if (feedMeAudioRef.current) feedMeAudioRef.current.muted = isSoundMuted
   }, [isSoundMuted])
 
   useEffect(() => {
@@ -232,69 +240,70 @@ export function HippoFruitFeastComponent() {
   }
 
   const spawnItem = () => {
-    if (gameAreaRef.current) {
-      const hippoRect = getHippoRect()
-      const hippoCenter = {
-        x: hippoRect.left + hippoRect.width / 2,
-        y: hippoRect.top + hippoRect.height / 2
-      }
+    if (!gameAreaRef.current) return
 
-      const side = Math.floor(Math.random() * 3)
-      let x = 0, y = 0
-
-      switch (side) {
-        case 0:
-          x = Math.random() * 100
-          y = -10
-          break
-        case 1:
-          x = -10
-          y = Math.random() * 50
-          break
-        case 2:
-          x = 110
-          y = Math.random() * 50
-          break
-      }
-
-      const angle = Math.atan2(hippoCenter.y - y, hippoCenter.x - x)
-      const directionX = Math.cos(angle)
-      const directionY = Math.sin(angle)
-
-      const shouldSpawnTrash = score >= 200 && Math.random() < 0.3
-      const shouldSpawnGolden = score >= 25 && Math.random() < 0.1 && !shouldSpawnTrash
-
-      let type: ItemType
-      let isTrash = false
-      let isGolden = false
-
-      if (shouldSpawnTrash) {
-        const trashTypes: TrashType[] = ['redcan', 'bluecan', 'greencan', 'bag', 'bottle', 'crushedbottle']
-        type = trashTypes[Math.floor(Math.random() * trashTypes.length)]
-        isTrash = true
-      } else if (shouldSpawnGolden) {
-        type = 'goldgrape'
-        isGolden = true
-      } else {
-        const fruitTypes: FruitType[] = ['mango', 'banana', 'carrot']
-        type = fruitTypes[Math.floor(Math.random() * fruitTypes.length)]
-      }
-
-      const newItem: Item = {
-        id: Date.now(),
-        type,
-        x,
-        y,
-        angle: angle * (180 / Math.PI),
-        speed: 0.5 + Math.random() * 0.5,
-        directionX,
-        directionY,
-        state: 'whole',
-        isTrash,
-        isGolden
-      }
-      setItems(prevItems => [...prevItems, newItem])
+    const hippoRect = getHippoRect()
+    const hippoCenter = {
+      x: hippoRect.left + hippoRect.width / 2,
+      y: hippoRect.top + hippoRect.height / 2
     }
+
+    let x = 0
+    let y = 0
+    const side = Math.floor(Math.random() * 3)
+
+    switch (side) {
+      case 0:
+        x = Math.random() * 100
+        y = -10
+        break
+      case 1:
+        x = -10
+        y = Math.random() * 50
+        break
+      case 2:
+        x = 110
+        y = Math.random() * 50
+        break
+    }
+
+    const angle = Math.atan2(hippoCenter.y - y, hippoCenter.x - x)
+    const directionX = Math.cos(angle)
+    const directionY = Math.sin(angle)
+
+    const shouldSpawnTrash = score >= 200 && Math.random() < 0.3
+    const shouldSpawnGolden = score >= 25 && Math.random() < 0.1 && !shouldSpawnTrash
+
+    let type: ItemType
+    let isTrash = false
+    let isGolden = false
+
+    if (shouldSpawnTrash) {
+      const trashTypes: TrashType[] = ['redcan', 'bluecan', 'greencan', 'bag', 'bottle', 'crushedbottle']
+      type = trashTypes[Math.floor(Math.random() * trashTypes.length)]
+      isTrash = true
+    } else if (shouldSpawnGolden) {
+      type = 'goldgrape'
+      isGolden = true
+    } else {
+      const fruitTypes: FruitType[] = ['mango', 'banana', 'carrot']
+      type = fruitTypes[Math.floor(Math.random() * fruitTypes.length)]
+    }
+
+    const newItem: Item = {
+      id: Date.now(),
+      type,
+      x,
+      y,
+      angle: angle * (180 / Math.PI),
+      speed: 0.5 + Math.random() * 0.5,
+      directionX,
+      directionY,
+      state: 'whole',
+      isTrash,
+      isGolden
+    }
+    setItems(prevItems => [...prevItems, newItem])
   }
 
   useEffect(() => {
@@ -331,8 +340,9 @@ export function HippoFruitFeastComponent() {
     }
   }, [gameStarted])
 
-  const playRandomAudio = (isTrash: boolean) => {
-    if (isSoundMuted) return;
+  const playRandomAudio = (isTrash: boolean | undefined) => {
+    if (isSoundMuted) return
+    
     const audioArray = isTrash ? trashAudioRefs.current : audioRefs.current
     let randomIndex
     do {
@@ -387,9 +397,9 @@ export function HippoFruitFeastComponent() {
                 }, 2000)
               } else {
                 setScore(prevScore => {
-                  const points = item.isTrash ? -30 : 1
+                  let points = item.isTrash ? -30 : 1
                   const newScore = prevScore + points
-                  if (newScore === 195 && !hasShownWarning) { 
+                  if (newScore >= 190 && !hasShownWarning) { 
                     setShowWarning(true)
                     setHasShownWarning(true)
                     setTimeout(() => setShowWarning(false), 2000)
@@ -404,7 +414,7 @@ export function HippoFruitFeastComponent() {
                 })
               }
 
-              playRandomAudio(item.isTrash || true)
+              playRandomAudio(item.isTrash)
               
               if (!item.isTrash && !item.isGolden) {
                 setConsecutiveFruits(prev => {
@@ -482,9 +492,6 @@ export function HippoFruitFeastComponent() {
     setIsSoundMuted(true)
     setIsHippoSick(false)
     lastPlayedAudioIndex.current = -1
-
-    console.log(trashEaten);
-    console.log(threeInARowAchieved);
   }
 
   const startGame = () => {
@@ -558,7 +565,7 @@ export function HippoFruitFeastComponent() {
                   key={item.id}
                   className="absolute"
                   style={{ 
-                    left: `${item.x}%`, 
+                                        left: `${item.x}%`, 
                     top: `${item.y}%`, 
                     transform: `rotate(${item.angle}deg)`,
                     transition: 'transform 0.1s linear',
@@ -566,7 +573,7 @@ export function HippoFruitFeastComponent() {
                   }}
                   initial={{ opacity: 0, scale: 0 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0 }}
+                  exit={{ opacity: 0, scale: 0                 }}
                 >
                   <img 
                     src={getItemImage(item)}
