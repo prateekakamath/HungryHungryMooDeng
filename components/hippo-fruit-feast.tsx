@@ -99,7 +99,7 @@ export default function HippoFruitFeast() {
   const [showFortyPoints, setShowFortyPoints] = useState(false)
   const [showGoldenBadge, setShowGoldenBadge] = useState(false)
   const [isHippoSick, setIsHippoSick] = useState(false) 
-  const [trashEaten, setTrashEaten] = useState(0) 
+  const [trashCount, setTrashCount] = useState(0) 
   const [firstTrashEaten, setFirstTrashEaten] = useState(false) 
   const [showGameOver, setShowGameOver] = useState(false) 
   const [showWarning, setShowWarning] = useState(false) 
@@ -381,9 +381,9 @@ export default function HippoFruitFeast() {
                 }, 2000)
               } else {
                 setScore(prevScore => {
-                  let points = item.isTrash ? -30 : 1
+                  const points = item.isTrash ? -30 : 1
                   const newScore = prevScore + points
-                  if (newScore >= 190 && !hasShownWarning) { 
+                  if (newScore >= 190 && !hasShownWarning) {
                     setShowWarning(true)
                     setHasShownWarning(true)
                     setTimeout(() => setShowWarning(false), 2000)
@@ -410,24 +410,24 @@ export default function HippoFruitFeast() {
                 })
               }
               
-              if (item.isTrash) { 
+              if (item.isTrash) {
                 setAteTrash(true)
-                setIsHippoSick(true) 
+                setIsHippoSick(true)
                 if (!firstTrashEaten) {
                   setFirstTrashEaten(true)
                   setTimeout(() => setFirstTrashEaten(false), 2000)
                 }
-                setTrashEaten(prev => {
-                  const newTrashEaten = prev + 1
-                  if (newTrashEaten >= 10) {
+                setTrashCount(prev => {
+                  const newCount = prev + 1
+                  if (newCount >= 10) {
                     setShowGameOver(true)
                     setIsSoundMuted(true)
                   }
-                  return newTrashEaten
+                  return newCount
                 })
               } else {
                 setAteTrash(false)
-                setIsHippoSick(false) 
+                setIsHippoSick(false)
               }
               
               return { ...item, state: 'eaten' }
@@ -442,6 +442,7 @@ export default function HippoFruitFeast() {
       }, 200)
     }
   }
+
 
   useEffect(() => {
     if (consecutiveFruits.length === 3 &&
@@ -465,13 +466,12 @@ export default function HippoFruitFeast() {
     setScore(0)
     setItems([])
     setConsecutiveFruits([])
-    setThreeInARowAchieved(false)
     setTenFruitsAchieved(false)
     resetIdleTime()
-    setTrashEaten(0)
-    setFirstTrashEaten(false) 
-    setShowGameOver(false) 
-    setShowWarning(false) 
+    setTrashCount(0)
+    setFirstTrashEaten(false)
+    setShowGameOver(false)
+    setShowWarning(false)
     setHasShownWarning(false)
     setIsSoundMuted(true)
     setIsHippoSick(false)
