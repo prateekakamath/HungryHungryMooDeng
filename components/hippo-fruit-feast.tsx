@@ -482,6 +482,9 @@ export function HippoFruitFeastComponent() {
     setIsSoundMuted(true)
     setIsHippoSick(false)
     lastPlayedAudioIndex.current = -1
+
+    console.log(trashEaten);
+    console.log(threeInARowAchieved);
   }
 
   const startGame = () => {
