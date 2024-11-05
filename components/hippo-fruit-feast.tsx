@@ -91,10 +91,10 @@ const trashAudioFiles = [
   "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/young-child-saying-y_65naqnFN%20(1)-5H6c8lqnx7Rb23KWqfAf294RDzeuXT.mp3"
 ]
 
-const threeInARowAudio = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/a-happy-child-shouti_Nf6PdRIw-TS6jJKelW2opikukagHRZyFhHbZjXy.mp3"
-const tenFruitsAudio = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/a-happy-child-shouti_ujtY9ZAu-mwAFkh0dKrZfIf3vvq4w0mpgZnKioZ.mp3"
-const hungryAudio = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/I%20am%20hungry-zidZi24ZNPQkDqnpUPJCOHWGRq6Zt8.mp3"
-const feedMeAudio = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/feed%20me-zOZX9c8Y7ajx6c4rqNl8zWwUzCCy83.mp3"
+// const threeInARowAudio = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/a-happy-child-shouti_Nf6PdRIw-TS6jJKelW2opikukagHRZyFhHbZjXy.mp3"
+// const tenFruitsAudio = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/a-happy-child-shouti_ujtY9ZAu-mwAFkh0dKrZfIf3vvq4w0mpgZnKioZ.mp3"
+// const hungryAudio = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/I%20am%20hungry-zidZi24ZNPQkDqnpUPJCOHWGRq6Zt8.mp3"
+// const feedMeAudio = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/feed%20me-zOZX9c8Y7ajx6c4rqNl8zWwUzCCy83.mp3"
 
 export function HippoFruitFeastComponent() {
   const [score, setScore] = useState(0)
@@ -240,7 +240,7 @@ export function HippoFruitFeastComponent() {
       }
 
       const side = Math.floor(Math.random() * 3)
-      let x, y
+      let x = 0, y = 0
 
       switch (side) {
         case 0:
@@ -257,7 +257,7 @@ export function HippoFruitFeastComponent() {
           break
       }
 
-      const angle = Math.atan2(hippoCenter.y - (y || 0), hippoCenter.x - (x || 0))
+      const angle = Math.atan2(hippoCenter.y - y, hippoCenter.x - x)
       const directionX = Math.cos(angle)
       const directionY = Math.sin(angle)
 
