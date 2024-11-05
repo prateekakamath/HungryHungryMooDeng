@@ -115,32 +115,59 @@ export default function HippoFruitFeast() {
   const lastPlayedAudioIndex = useRef<number>(-1)
 
   useEffect(() => {
-    audioRefs.current = audioFiles.map(() => {
-      const audio = new Audio()
+    // Initialize audio elements with their sources
+    audioRefs.current = audioFiles.map(src => {
+      const audio = new Audio(src)
       audio.muted = isSoundMuted
       return audio
     })
     
-    trashAudioRefs.current = trashAudioFiles.map(() => {
-      const audio = new Audio()
+    trashAudioRefs.current = trashAudioFiles.map(src => {
+      const audio = new Audio(src)
       audio.muted = isSoundMuted
       return audio
     })
 
-    if (!threeInARowAudioRef.current) {
-      threeInARowAudioRef.current = new Audio(threeInARowAudio)
-    }
-    if (!tenFruitsAudioRef.current) {
-      tenFruitsAudioRef.current = new Audio(tenFruitsAudio)
-    }
-    if (!hungryAudioRef.current) {
-      hungryAudioRef.current = new Audio(hungryAudio)
-    }
-    if (!feedMeAudioRef.current) {
-      feedMeAudioRef.current = new Audio(feedMeAudio)
-    }
+    // Initialize special audio elements
+    threeInARowAudioRef.current = new Audio(threeInARowAudio)
+    tenFruitsAudioRef.current = new Audio(tenFruitsAudio)
+    hungryAudioRef.current = new Audio(hungryAudio)
+    feedMeAudioRef.current = new Audio(feedMeAudio)
 
     // Set muted state for all audio elements
+    const updateMutedState = () => {
+      audioRefs.current.forEach(audio => {
+        if (audio) audio.muted = isSoundMuted
+      })
+      trashAudioRefs.current.forEach(audio => {
+        if (audio) audio.muted = isSoundMuted
+      })
+      if (threeInARowAudioRef.current) threeInARowAudioRef.current.muted = isSoundMuted
+      if (tenFruitsAudioRef.current) tenFruitsAudioRef.current.muted = isSoundMuted
+      if (hungryAudioRef.current) hungryAudioRef.current.muted = isSoundMuted
+      if (feedMeAudioRef.current) feedMeAudioRef.current.muted = isSoundMuted
+    }
+
+    updateMutedState()
+
+    // Cleanup function
+    return () => {
+      audioRefs.current.forEach(audio => {
+        if (audio) {
+          audio.pause()
+          audio.src = ''
+        }
+      })
+      trashAudioRefs.current.forEach(audio => {
+        if (audio) {
+          audio.pause()
+          audio.src = ''
+        }
+      })
+    }
+  }, [])
+
+  useEffect(() => {
     audioRefs.current.forEach(audio => {
       if (audio) audio.muted = isSoundMuted
     })
@@ -334,8 +361,11 @@ export default function HippoFruitFeast() {
     
     const audio = audioArray[randomIndex]
     if (audio) {
-      audio.currentTime = 0
-      audio.play().catch(error => console.error("Audio playback failed:", error))
+      // Create a new Audio instance for each play to allow overlapping sounds
+      const newAudio = new Audio(audio.src)
+      newAudio.muted = isSoundMuted
+      newAudio.play()
+        .catch(error => console.error("Audio playback failed:", error))
       lastPlayedAudioIndex.current = randomIndex
     }
   }
