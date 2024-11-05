@@ -104,7 +104,6 @@ export default function HippoFruitFeast() {
   const [consecutiveFruits, setConsecutiveFruits] = useState<FruitType[]>([])
   const [showThreeInARow, setShowThreeInARow] = useState(false)
   const [showCoin, setShowCoin] = useState(false)
-  const [threeInARowAchieved, setThreeInARowAchieved] = useState(false)
   const [showTenFruits, setShowTenFruits] = useState(false)
   const [tenFruitsAchieved, setTenFruitsAchieved] = useState(false)
   const [idleTime, setIdleTime] = useState(0)
@@ -115,7 +114,6 @@ export default function HippoFruitFeast() {
   const [showFortyPoints, setShowFortyPoints] = useState(false)
   const [showGoldenBadge, setShowGoldenBadge] = useState(false)
   const [isHippoSick, setIsHippoSick] = useState(false) 
-  const [trashEaten, setTrashEaten] = useState(0) 
   const [firstTrashEaten, setFirstTrashEaten] = useState(false) 
   const [showGameOver, setShowGameOver] = useState(false) 
   const [showWarning, setShowWarning] = useState(false) 
@@ -397,7 +395,7 @@ export default function HippoFruitFeast() {
                 }, 2000)
               } else {
                 setScore(prevScore => {
-                  let points = item.isTrash ? -30 : 1
+                  const points = item.isTrash ? -30 : 1
                   const newScore = prevScore + points
                   if (newScore >= 190 && !hasShownWarning) { 
                     setShowWarning(true)
@@ -433,14 +431,6 @@ export default function HippoFruitFeast() {
                   setFirstTrashEaten(true)
                   setTimeout(() => setFirstTrashEaten(false), 2000)
                 }
-                setTrashEaten(prev => {
-                  const newTrashEaten = prev + 1
-                  if (newTrashEaten >= 10) {
-                    setShowGameOver(true)
-                    setIsSoundMuted(true)
-                  }
-                  return newTrashEaten
-                })
               } else {
                 setAteTrash(false)
                 setIsHippoSick(false) 
@@ -481,10 +471,8 @@ export default function HippoFruitFeast() {
     setScore(0)
     setItems([])
     setConsecutiveFruits([])
-    setThreeInARowAchieved(false)
     setTenFruitsAchieved(false)
     resetIdleTime()
-    setTrashEaten(0)
     setFirstTrashEaten(false) 
     setShowGameOver(false) 
     setShowWarning(false) 
