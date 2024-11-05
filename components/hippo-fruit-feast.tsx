@@ -387,7 +387,7 @@ export function HippoFruitFeastComponent() {
                 }, 2000)
               } else {
                 setScore(prevScore => {
-                  let points = item.isTrash ? -30 : 1
+                  const points = item.isTrash ? -30 : 1
                   const newScore = prevScore + points
                   if (newScore === 195 && !hasShownWarning) { 
                     setShowWarning(true)
