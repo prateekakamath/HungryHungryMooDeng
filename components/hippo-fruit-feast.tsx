@@ -88,7 +88,6 @@ export default function HippoFruitFeast() {
   const [consecutiveFruits, setConsecutiveFruits] = useState<FruitType[]>([])
   const [showThreeInARow, setShowThreeInARow] = useState(false)
   const [showCoin, setShowCoin] = useState(false)
-  const [threeInARowAchieved, setThreeInARowAchieved] = useState(false)
   const [showTenFruits, setShowTenFruits] = useState(false)
   const [tenFruitsAchieved, setTenFruitsAchieved] = useState(false)
   const [idleTime, setIdleTime] = useState(0)
@@ -418,6 +417,7 @@ export default function HippoFruitFeast() {
                   setTimeout(() => setFirstTrashEaten(false), 2000)
                 }
                 setTrashCount(prev => {
+                  console.log(trashCount)
                   const newCount = prev + 1
                   if (newCount >= 10) {
                     setShowGameOver(true)
