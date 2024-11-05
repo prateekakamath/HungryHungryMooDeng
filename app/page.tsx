@@ -1,9 +1,9 @@
-import { HippoFruitFeastComponent } from "../components/hippo-fruit-feast"
+import HippoFruitFeast from "@/components/hippo-fruit-feast";
 
 export default function Home() {
   return (
     <div>
-        <HippoFruitFeastComponent/>
+        <HippoFruitFeast />
     </div>
   );
 }
