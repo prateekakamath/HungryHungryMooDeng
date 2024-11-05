@@ -21,80 +21,64 @@ type Item = {
   isGolden?: boolean
 }
 
-const fruitImages = {
+export const fruitImages = {
   mango: {
-    whole: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_n5n320n5n320n5n3%20Background%20Removed-uQqsyg2t2oGdV6Q9cnPCkOj35rz5bU.png",
-    smashed: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_sjsz0zsjsz0zsjsz%20Background%20Removed-Nb7947DNbKfTRK5ThAOwYo3FiXznOp.png"
+    whole: '/images/fruits/whole/mango.png',
+    smashed: '/images/fruits/smashed/mango.png'
   },
   banana: {
-    whole: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_svgtlssvgtlssvgt%20Background%20Removed-qJImaGK2mXV4LE1LKxkT0IXxFKKIoB.png",
-    smashed: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_txuuvhtxuuvhtxuu%20(1)%20Background%20Removed-pFuP9f0yrw0DyzIyQgDQ9IsEri3h7b.png"
+    whole: '/images/fruits/whole/banana.png',
+    smashed: '/images/fruits/smashed/banana.png'
   },
   carrot: {
-    whole: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_yxptpoyxptpoyxpt%20Background%20Removed-cBjNIY5QDt9DiqZNZA8HkKkhvHsixG.png",
-    smashed: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_ab77ooab77ooab77%20Background%20Removed-2kWTHq1DZmm72jAbWzapLckAKg1JqR.png"
+    whole: '/images/fruits/whole/carrot.png',
+    smashed: '/images/fruits/smashed/carrot.png'
   },
   goldgrape: {
-    whole: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_8hf8pp8hf8pp8hf8%20Background%20Removed-JUigVyxygyLKXIXcFGnZtnJBy4ViKq.png",
-    smashed: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_8hf8pp8hf8pp8hf8%20Background%20Removed-JUigVyxygyLKXIXcFGnZtnJBy4ViKq.png"
+    whole: '/images/fruits/whole/goldgrape.png',
+    smashed: '/images/fruits/smashed/goldgrape.png'
   }
 }
 
-const trashImages = {
+export const trashImages = {
   redcan: {
-    whole: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_rgxg2orgxg2orgxg%20Background%20Removed-WVoJe65V7xAjm9OZBtNqFaLqbuEOjh.png",
-    smashed: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_cpqorycpqorycpqo%20Background%20Removed-azRHg8k8dEyXSKtHZzXcVI2iiLyzC4.png"
+    whole: '/images/trash/whole/redcan.png',
+    smashed: '/images/trash/smashed/redcan.png'
   },
   bluecan: {
-    whole: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_xgd58exgd58exgd5%20(1)%20Background%20Removed-TeNOTP82hbynO80dWW6FaKzAde6EVn.png",
-    smashed: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_xgd58exgd58exgd5%20(1)%20Background%20Removed-TeNOTP82hbynO80dWW6FaKzAde6EVn.png"
+    whole: '/images/trash/whole/bluecan.png',
+    smashed: '/images/trash/smashed/bluecan.png'
   },
   greencan: {
-    whole: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_phhupophhupophhu%20(1)%20Background%20Removed-fRwzJvoOzH8lcaftQ86OQqRG0s8SwP.png",
-    smashed: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_phhupophhupophhu%20(1)%20Background%20Removed-fRwzJvoOzH8lcaftQ86OQqRG0s8SwP.png"
+    whole: '/images/trash/whole/greencan.png',
+    smashed: '/images/trash/smashed/greencan.png'
   },
   bag: {
-    whole: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_hejgrahejgrahejg%20Background%20Removed-wTju2esmKe1yUgBiYHOrmQU27333ot.png",
-    smashed: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_abed9pabed9pabed%20Background%20Removed-FzwIFB7wNnuxi4nZhlDfZKbaukIPhJ.png"
+    whole: '/images/trash/whole/bag.png',
+    smashed: '/images/trash/smashed/bag.png'
   },
   bottle: {
-    whole: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_36q72m36q72m36q7%20Background%20Removed-zEFz82nEdzwTAsB1xiGe0M8ScRpAWp.png",
-    smashed: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_36q72m36q72m36q7%20Background%20Removed-zEFz82nEdzwTAsB1xiGe0M8ScRpAWp.png"
+    whole: '/images/trash/whole/bottle.png',
+    smashed: '/images/trash/smashed/bottle.png'
   },
   crushedbottle: {
-    whole: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_dt4d12dt4d12dt4d%20Background%20Removed-eMi43FeMXmOqTG0Hz4qBmDXOu3oOnn.png",
-    smashed: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_dt4d12dt4d12dt4d%20Background%20Removed-eMi43FeMXmOqTG0Hz4qBmDXOu3oOnn.png"
+    whole: '/images/trash/whole/crushedbottle.png',
+    smashed: '/images/trash/smashed/crushedbottle.png'
   }
 }
 
-const audioFiles = [
-  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/11l-a-happy-child-saying-1730120700574_nS7M3c6U-usf9RtkyGxLZr8Bcx9xDJtxH2huf0T.mp3",
-  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/11l-a-cartoon-animal-eat-1730119570878_9ULaxG1e-HKauKKA23DwCI3oNA85VC1oMEveYAH.mp3",
-  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/11l-a-happy-child-eating-1730120867937_XmncF2BY-lLzJBfEMQaoo81tQDo9pkyTiGcZsdU.mp3",
-  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/11l-a-cartoon-animal-eat-1730119570878_ewyMuUeD-bxueErE1KJicpNmBCGKoX7J82pYQca.mp3",
-  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/11l-a-cartoon-animal-eat-1730119570878_u4rI7I1d-EBjHESbJ1eVVYaezkKvxTJdQN4AR2A.mp3",
-  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/11l-a-cartoon-child-enjo-1730120655025_La6Chp07-C2LFptHqmTXJTNP9StYp2Bn80NBSAw.mp3",
-  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/11l-a-cartoon-animal-eat-1730119570878_fgZRxL2q-eTa5cNSKe5RaKDQOGNhH6gxhUQcG9A.mp3",
-  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/11l-a-cartoon-child-enjo-1730120655025_0dWHAI4E-NUB2yOoLK5mXcow9J7WIPVCHAzHOuq.mp3",
-  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/11l-a-happy-child-saying-1730120700574_HIHtjobJ-mfqlu2Do03xyvOlVzcshImmaYTor7d.mp3",
-  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/11l-a-cartoon-animal-eat-1730119570878_2cKCPMKG-ZKcPyLOuPRFvgiavzgLpSS2TMDMNEc.mp3"
-]
+export const audioFiles = Array.from({ length: 10 }, (_, i) => 
+  `/audio/fruits/sound${i + 1}.mp3`
+)
 
-const trashAudioFiles = [
-  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/11l-young-child-saying-y-1730721577779_brn0DCnX-YzIJlqsWMX8qtMbF9Smig41lDOFLei.mp3",
-  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/11l-young-child-saying-y-1730721577779_jur3ScAL-Z1ZhFMEF3BzxFgwJFeTNxp4g1S6h6n.mp3",
-  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/young-child-saying-y_DHaP8caY-kcJSBA1RknlduQf7I2dD0MyoitYPuh.mp3",
-  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/young-child-saying-y_XCgM6grY-F7buvI8RBEc2134GCO5u4I5gW0xIYk.mp3",
-  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/11l-young-child-saying-y-1730721577779_sgwDJybP-YwbDtYVVemwZcVHb6IM96nvVK8z6Z1.mp3",
-  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/young-child-saying-y_65naqnFN-vQhcyaGcPbprooRRLTVVYZgWhHEGvo.mp3",
-  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/young-child-saying-y_kn0iggVc-aAQ3JMT2Sc9UaXQhy4dq5iyeVFKduS.mp3",
-  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/young-child-saying-y_65naqnFN%20(1)-5H6c8lqnx7Rb23KWqfAf294RDzeuXT.mp3"
-]
+export const trashAudioFiles = Array.from({ length: 8 }, (_, i) => 
+  `/audio/trash/sound${i + 1}.mp3`
+)
 
-const threeInARowAudio = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/a-happy-child-shouti_Nf6PdRIw-TS6jJKelW2opikukagHRZyFhHbZjXy.mp3"
-const tenFruitsAudio = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/a-happy-child-shouti_ujtY9ZAu-mwAFkh0dKrZfIf3vvq4w0mpgZnKioZ.mp3"
-const hungryAudio = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/I%20am%20hungry-zidZi24ZNPQkDqnpUPJCOHWGRq6Zt8.mp3"
-const feedMeAudio = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/feed%20me-zOZX9c8Y7ajx6c4rqNl8zWwUzCCy83.mp3"
+export const threeInARowAudio = '/audio/special/threeInARow.mp3'
+export const tenFruitsAudio = '/audio/special/tenFruits.mp3'
+export const hungryAudio = '/audio/special/hungry.mp3'
+export const feedMeAudio = '/audio/special/feedMe.mp3'
 
 export default function HippoFruitFeast() {
   const [score, setScore] = useState(0)
