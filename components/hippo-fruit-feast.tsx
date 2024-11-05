@@ -152,14 +152,14 @@ export function HippoFruitFeastComponent() {
         trashAudioRefs.current[index].src = file
       }
     })
-    threeInARowAudioRef.current = new Audio(threeInARowAudio)
-    threeInARowAudioRef.current.muted = isSoundMuted
-    tenFruitsAudioRef.current = new Audio(tenFruitsAudio)
-    tenFruitsAudioRef.current.muted = isSoundMuted
-    hungryAudioRef.current = new Audio(hungryAudio)
-    hungryAudioRef.current.muted = isSoundMuted
-    feedMeAudioRef.current = new Audio(feedMeAudio)
-    feedMeAudioRef.current.muted = isSoundMuted
+    // threeInARowAudioRef.current = new Audio(threeInARowAudio)
+    // threeInARowAudioRef.current.muted = isSoundMuted
+    // tenFruitsAudioRef.current = new Audio(tenFruitsAudio)
+    // tenFruitsAudioRef.current.muted = isSoundMuted
+    // hungryAudioRef.current = new Audio(hungryAudio)
+    // hungryAudioRef.current.muted = isSoundMuted
+    // feedMeAudioRef.current = new Audio(feedMeAudio)
+    // feedMeAudioRef.current.muted = isSoundMuted
   }, [isSoundMuted])
 
   useEffect(() => {
@@ -257,7 +257,7 @@ export function HippoFruitFeastComponent() {
           break
       }
 
-      const angle = Math.atan2(hippoCenter.y - y, hippoCenter.x - x)
+      const angle = Math.atan2(hippoCenter.y - (y || 0), hippoCenter.x - (x || 0))
       const directionX = Math.cos(angle)
       const directionY = Math.sin(angle)
 
@@ -404,7 +404,7 @@ export function HippoFruitFeastComponent() {
                 })
               }
 
-              playRandomAudio(item.isTrash)
+              playRandomAudio(item.isTrash || true)
               
               if (!item.isTrash && !item.isGolden) {
                 setConsecutiveFruits(prev => {
